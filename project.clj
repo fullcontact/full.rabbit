@@ -1,4 +1,4 @@
-(defproject fullcontact/full.rabbit "0.10.2-SNAPSHOT"
+(defproject fullcontact/full.rabbit "0.10.2"
   :description "RabbitMQ sugar on top of langohr."
   :url "https://github.com/fullcontact/full.rabbit"
   :license {:name "Eclipse Public License - v 1.0"
@@ -7,10 +7,10 @@
   :deploy-repositories [["releases" {:url "https://clojars.org/repo/" :creds :gpg}]]
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [com.novemberain/langohr "3.2.0" :exclusions [cheshire]]
-                 [fullcontact/full.metrics "0.10.1"]
+                 [fullcontact/full.metrics "0.10.2"]
                  [fullcontact/full.json "0.10.1"]
                  [fullcontact/full.async "0.9.0"]
-                 [fullcontact/full.core "0.10.1"]]
+                 [fullcontact/full.core "0.10.1" :exclusions [org.clojure/clojurescript]]]
   :release-tasks [["vcs" "assert-committed"]
                   ["change" "version" "leiningen.release/bump-version" "release"]
                   ["vcs" "commit"]
