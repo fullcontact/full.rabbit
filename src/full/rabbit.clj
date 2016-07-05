@@ -15,19 +15,26 @@
   (:import (com.rabbitmq.client QueueingConsumer)
            (com.rabbitmq.client Channel)))
 
-(def hosts (opt [:rabbit :hosts]))
 
-(def conn (delay (let [c (lc/connect {:hosts @hosts})]
-                   (log/info "Connected to RabbitMQ servers" @hosts)
-                   c)))
+(def ^:private hosts (opt [:rabbit :hosts]))
+
+(defn connect
+  "Creates and returns a new RabbitMQ connection."
+  [rabbit-hosts]
+  (let [c (lc/connect {:hosts rabbit-hosts})]
+    (log/info "Connected to RabbitMQ servers" rabbit-hosts)
+    c))
+
+(def ^:private conn (delay (connect @hosts)))
 
 (defn parse-payload [payload]
   (-> payload (String. "UTF-8") (read-json)))
 
 (defn open-channel
-  ([] (open-channel 1))
-  ([prefetch]
-   (let [ch (lch/open @conn)]
+  ([] (open-channel 1 @conn))
+  ([prefetch] (open-channel prefetch @conn))
+  ([prefetch connection]
+   (let [ch (lch/open connection)]
      (lb/qos ch prefetch)
      ch)))
 
