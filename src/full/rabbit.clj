@@ -139,7 +139,7 @@
   [ch queue]
   (async/go-loop []
                  (when-let [cnt (<? (message-count> ch queue))]
-                   (gauge (str "rabbit." queue ".messages")))
+                   (gauge (str "rabbit." queue ".messages") cnt))
                  (<? (async/timeout message-count-fetch-interval))
                  (recur)))
 
