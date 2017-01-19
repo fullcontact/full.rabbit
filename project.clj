@@ -7,7 +7,7 @@
   :deploy-repositories [["releases" {:url "https://clojars.org/repo/" :creds :gpg}]]
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [com.novemberain/langohr "3.2.0" :exclusions [cheshire]]
-                 [fullcontact/full.metrics "0.10.2"]
+                 [fullcontact/full.metrics "0.11.4"]
                  [fullcontact/full.json "0.10.1"]
                  [fullcontact/full.async "0.9.0"]
                  [fullcontact/full.core "0.10.1" :exclusions [org.clojure/clojurescript]]]

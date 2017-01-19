@@ -10,7 +10,7 @@
             [full.core.log :as log]
             [full.core.config :refer [opt]]
             [full.json :refer [read-json write-json]]
-            [full.metrics :refer [wrap-timeit go-try-timeit track]]
+            [full.metrics :refer [wrap-timeit go-try-timeit gauge]]
             [full.async :refer [<? go-try alts?]])
   (:import (com.rabbitmq.client QueueingConsumer)
            (com.rabbitmq.client Channel)))
@@ -139,8 +139,7 @@
   [ch queue]
   (async/go-loop []
                  (when-let [cnt (<? (message-count> ch queue))]
-                   (track {:service (str "rabbit." queue ".messages")
-                           :metric cnt}))
+                   (gauge (str "rabbit." queue ".messages")))
                  (<? (async/timeout message-count-fetch-interval))
                  (recur)))
 
