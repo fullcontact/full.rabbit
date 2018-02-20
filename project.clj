@@ -1,4 +1,4 @@
-(defproject fullcontact/full.rabbit "0.10.6-SNAPSHOT"
+(defproject fullcontact/full.rabbit "0.10.6"
   :description "RabbitMQ sugar on top of langohr."
   :url "https://github.com/fullcontact/full.rabbit"
   :license {:name "Eclipse Public License - v 1.0"
